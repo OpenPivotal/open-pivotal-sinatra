@@ -1,0 +1,32 @@
+<div class="col-md-3">
+  <h3>Icebox</h3>
+  <div class="cards">
+    <% @icebox.each do |card| %>
+      <%= erb :card, locals: { card: card } %>
+    <% end %>
+  </div>
+</div>
+<div class="col-md-3">
+  <h3>Backlog</h3>
+  <div class="cards">
+    <% @icebox.each do |card| %>
+      <%= erb :card, locals: { card: card } %>
+    <% end %>
+  </div>
+</div>
+<div class="col-md-3">
+  <h3>Doing</h3>
+  <div class="cards">
+    <% @icebox.each do |card| %>
+      <%= erb :card, locals: { card: card } %>
+    <% end %>
+  </div>
+</div>
+<div class="col-md-3">
+  <h3>Done</h3>
+  <div class="cards">
+    <% @icebox.each do |card| %>
+      <%= erb :card, locals: { card: card } %>
+    <% end %>
+  </div>
+</div>

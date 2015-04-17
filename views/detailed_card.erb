@@ -1,0 +1,17 @@
+<div class="well">
+  <p>
+    <a class="bland-link" href="/card/<%= @card.id %>"><b><%= @card.name %></b></a>
+  </p>
+  <p>
+    Description: <%= @card.description %>
+  </p>
+  <p>
+    Requested: <%= @card.created_at %>
+  </p>
+  <p>
+    Estimate: <%= @card.estimate %>
+  </p>
+  <p>
+    Labels: <%= @card.labels %>
+  </p>
+</div>
