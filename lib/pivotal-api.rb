@@ -19,6 +19,10 @@ class PivotalApi
     new(config["api_key"], config["project"])
   end
 
+  def self.build_from_env
+    new(ENV["pivotal_api_key"], ENV["pivotal_project"])
+  end
+
   def get(endpoint)
     response = @conn.get do |req|
       req.url "/services/v5/projects/#{@project}#{endpoint}"
