@@ -3,19 +3,21 @@ require './lib/pivotal-api'
 
 class App < Sinatra::Base
   get '/' do
-    api = PivotalApi.build_from_env
+    api = PivotalApi.build_from_yaml
 
+    @selected_label = params[:label]
     @project = api.find_project
-    @icebox = api.find_cards(:icebox)
-    @backlog = api.find_cards(:backlog)
-    @doing = api.find_cards(:doing)
-    @done = api.find_cards(:done)
+    @icebox = api.find_cards(:icebox, @selected_label)
+    @backlog = api.find_cards(:backlog, @selected_label)
+    @doing = api.find_cards(:doing, @selected_label)
+    @done = api.find_cards(:done, @selected_label)
+    @labels = api.find_labels
 
     erb :index
   end
 
   get '/card/:id' do
-    api = PivotalApi.build_from_env
+    api = PivotalApi.build_from_yaml
 
     @project = api.find_project
     @card = api.find_card(params['id'])

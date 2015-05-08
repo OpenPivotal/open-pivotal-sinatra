@@ -2,6 +2,7 @@ require 'json'
 require 'yaml'
 require 'faraday'
 require './models/card'
+require './models/label'
 require './models/project'
 
 class PivotalApi
@@ -39,7 +40,7 @@ class PivotalApi
     Card.new(get("/stories/#{id}"))
   end
 
-  def find_cards(filter)
+  def find_cards(filter, label)
     states = {
       icebox: [ 'unscheduled' ],
       backlog: [ 'unstarted', 'planned' ],
@@ -48,7 +49,12 @@ class PivotalApi
     }
 
     state = states[filter].join(',')
+    labels = [ 'public' ]
+    labels << label if label
+    get("/stories?filter=state:#{state} #{labels.map { |label| "label:#{label}"  }.join(' ')}").map { |card| Card.new(card) }
+  end
 
-    get("/stories?filter=state:#{state} label:public").map { |card| Card.new(card) }
+  def find_labels
+    get('/labels').map { |label| Label.new(label) }
   end
 end

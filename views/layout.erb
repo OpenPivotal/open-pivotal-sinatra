@@ -8,6 +8,7 @@
     <meta name="author" content="">
     <title>Pivotal Public</title>
     <link href="/css/app.css" rel="stylesheet">
+    <link href="/css/select2.min.css" rel="stylesheet">
   </head>
   <body>
     <div class="container">
@@ -21,5 +22,16 @@
         <%= yield %>
       </div>
     </div>
+  <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+  <script src="/js/select2.full.min.js"></script>
+  <script type="text/javascript">
+    $('#search_label').select2({
+      placeholder: 'Please select a label to filer on'
+    });
+
+    $('#search_label').on('change', function () {
+      $('#search_form').submit();
+    });
+  </script>
   </body>
 </html>

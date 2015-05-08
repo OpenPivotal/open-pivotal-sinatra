@@ -1,3 +1,19 @@
+<div class="col-md-12">
+  <form id="search_form" method="GET" action="/">
+    <label>Filter on:</label>
+    <select id="search_label" name="label">
+      <option></option>
+      <% @labels.each do |label| %>
+        <% if label.name == @selected_label %>
+          <option selected="selected"><%= label.name %></option>
+        <% else %>
+          <option><%= label.name %></option>
+        <% end %>
+      <% end %>
+    </select>
+  </form>
+</div>
+
 <div class="col-md-3">
   <h3>Icebox</h3>
   <div class="cards">
