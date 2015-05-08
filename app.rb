@@ -3,7 +3,7 @@ require './lib/pivotal-api'
 
 class App < Sinatra::Base
   get '/' do
-    api = PivotalApi.build_from_yaml
+    api = PivotalApi.build_from_env
 
     @selected_label = params[:label]
     @project = api.find_project
@@ -17,7 +17,7 @@ class App < Sinatra::Base
   end
 
   get '/card/:id' do
-    api = PivotalApi.build_from_yaml
+    api = PivotalApi.build_from_env
 
     @project = api.find_project
     @card = api.find_card(params['id'])
