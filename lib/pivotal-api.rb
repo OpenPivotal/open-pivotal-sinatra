@@ -1,4 +1,5 @@
 require 'json'
+require 'uri'
 require 'yaml'
 require 'faraday'
 require './models/card'
@@ -51,7 +52,9 @@ class PivotalApi
     state = states[filter].join(',')
     labels = [ 'public' ]
     labels << label if label
-    labels = labels.map { |label| label.gsub(/\s/, '%20') }
+
+    labels = labels.map { |label| "\"#{label}\"" }
+
     get("/stories?filter=state:#{state} #{labels.map { |label| "label:#{label}"  }.join(' ')}").map { |card| Card.new(card) }
   end
 
